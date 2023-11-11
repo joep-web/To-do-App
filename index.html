@@ -1,25 +1,59 @@
 <!DOCTYPE html>
-<html lang="eng">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>me joping</title>
-    <link href="style.css" rel="stylesheet" type="text/css" />
-  </head>
-  
-  <body>
-    <header>
-      <h1>Hi! Am Joping</h1><br>
-    </header>
-    <nav>
-      <div>
-         <a href="about-me.html">About me</a><br/>
-      <a href="https://www.facebook.com/johnjoeprey.dangkulos?mibextid=ZbWKwL">Facebook</a><br />
-      <a href="https://instagram.com/joepreydangkulos?igshid=ZDdkNTZiNTM=">Instagram</a>
-      </div>
-    </nav>
-    
-      
-  </body>
+<html>
 
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>To Do</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  
+  <header>
+    
+    <div class="contForTitle">
+      <h3 class="responsiveTitle">To-dos</h3>
+      <p class="noteCount">Sample Count</p>
+    </div>
+    
+    <div class="options">
+      <button id="eto"><img src="options.svg" height="20px" width="20px" /></button>
+      <div class="hidden-option option-buttons">
+        <button>Edit</button>
+        <button>Hide completed</button>
+        <button>Settings</button>
+      </div>
+    </div>
+  </header>
+  
+  <main>
+    <div class="noteItem">
+      <button class="noteCheck"><img src="circle.svg" height="30px" width="30px" /></button>
+      test
+    </div>
+    <div class="noteItem">
+      <button class="noteCheck"><img src="circle.svg" height="30px" width="30px" /></button>
+      test
+    </div>
+    <div class="noteItem">
+      <button class="noteCheck"><img src="circle.svg" height="30px" width="30px" /></button>
+      test
+    </div>
+  </main>
+
+  <div class="new-note hidden">
+    <div class="new-note-head">
+      <button id="close-new-note"><img src="xclose.svg" height="30px" width="30px" /></button>
+      <span>New To-Do</span>
+      <button><img src="checkmark.svg" height="30px" width="30px" /></button>
+    </div>
+
+    <input type="text" placeholder="New to-do" id="inpt">
+  </div>
+
+  <button id="addNote"><img src="add.svg" height="20px" width="20px" </button>
+
+    <script src="script.js"></script>
+</body>
 </html>
