@@ -25,17 +25,19 @@ body {
   overflow: scroll;
 }
 
+/* nav */
 header {
   background: #000;
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(70px, 60%) 1fr;
   margin-bottom: 4%;
   position: sticky;
   top: 0;
+  z-index: 1;
 }
 
-.options {
+.options-cont {
   padding-bottom: 40px;
   transition: 0.4s;
   display: flex;
@@ -61,45 +63,122 @@ header {
   font-size: 2.2rem; 
   transition: 0.4s;
   font-weight:500;
+  display: inline;
 }
+
+#three-dot-btn {
+  height: 30px;
+  width: 30px;
+  border: none;
+  background: #000;
+  padding: 5px;
+  position: relative;
+  border-radius: 50%;
+  transition: 0.5s;
+}
+
+#three-dot-btn::before{
+  content: "";
+  height: 100%;
+  width: 100%;
+  background: gray;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: scale(0);
+  transition: transform 100ms;
+  opacity: 0.5;
+}
+
+#three-dot-btn:active::before{
+  transform:scale(1.2);
+}
+
+.option-menu {
+  display: flex;
+  padding: 15px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;  
+  background: #343434;
+  border-radius: 15px;
+  z-index: 2;
+  width: 95%;
+  max-width: 300px;
+  height: 115px;
+  position: absolute;
+  top: 45px;
+}
+
+.option-menu button {
+  font-size: 0.9rem;
+  border: none;
+  background: #343434;
+  padding: 5px;
+  color: white;
+  width: 95%;
+  text-align: left;
+}
+
+.hidden-option {
+  display: none;
+}
+
+/* nav */
+
+/* main */
 
 main {
   display: grid;
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-rows: repeat(3, minmax( 65px, 1fr));
   grid-template-columns: 1fr;
-  row-gap: 8px;
+  row-gap: 5px;
   overflow: scroll;
 }
 
 .noteItem {
-  padding: 3%;
+  position: relative;
+  padding: 4%;
   background: #28282B;
   border-radius: 10px;
   display: flex;
   align-items: center;
+  transition: transform 150ms;
 }
 
-.noteItem button {
-  border: none;
-  background: #28282B;
+.noteItem:active{
+  transform: scale(0.9);
 }
 
-img[src="circle.svg"] {
-  background: #28282B;
+.checkboxes {
+  margin-right: 2%;
+  position: relative;
 }
 
-button img {
-  border: none;
-  background: #000;
+input[type="checkbox"]{
+  appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  border: 1px solid gray;
+  transition: background-color 400ms;
 }
 
-/**/
-
-.options button {
-  border: none;
-  background: #000;
-  padding: 5px;
+input[type="checkbox"]:checked{
+  background-color: #7393B3;
+  transition: background-color 400ms ;
 }
+
+input[type="checkbox"]:checked::before{
+  position: absolute;
+  content: "✓";
+  color: white;
+  height: 15px;
+  width: 15px;
+  left: 4px ;
+}
+/*main*/
 
 #addNote {
   border: none;
@@ -113,43 +192,17 @@ button img {
   width: 50px;
   display: grid;
   place-items: center;
+  transition: transform 150ms;
+}
+
+#addNote:active {
+  transform: scale(0.9);
 }
 
 #addNote img {
   border: none;
   background: #7393B3;
 }
-
-.option-buttons {
-  display: flex;
-  padding: 15px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;  
-  background: #343434;
-  border-radius: 15px;
-  z-index: 2;
-  width: 80%;
-  height: 115px;
-  position: absolute;
-  top: 45px;
-}
-
-.option-buttons button {
-  font-size: 0.9rem;
-  border: none;
-  background: #343434;
-  padding: 5px;
-  color: white;
-  width: 95%;
-  text-align: left;
-  margin: 0 0 5px 0;
-}
-
-.hidden-option {
-  display: none;
-}
-
 
 .new-note{
   width: 100%;
@@ -191,4 +244,43 @@ button img {
   height: 15%;
   border-radius: 10px;
   padding: 10px;
+  color: white;
+}
+
+.new-note input:focus{
+  outline: none;
+}
+
+.close-edit::before {
+  content: "";
+  height: 100%;
+  width: 100%;
+  background: gray;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: scale(0);
+  transition: transform 1ms;
+  opacity: 0.5;
+  z-index: 5;
+}
+
+.close-edit:active::before{
+  transform:scale(1.2);
+  z-index: -1;
+}
+
+.close-edit, body > input[type="checkbox"] {
+  position: absolute;
+  top: 2%;
+  z-index: 2;
+}
+
+body > input[type="checkbox"] {
+  right: 5%;
+}
+
+.close-edit{
+  left: 5%;
 }

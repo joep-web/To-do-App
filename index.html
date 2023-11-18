@@ -9,35 +9,35 @@
 </head>
 
 <body>
-  
+  <img src="xclose.svg" class="close-edit hidden" height="25px" width="25px"/>
+  <input type="checkbox" class="check hidden">
   <header>
-    
     <div class="contForTitle">
       <h3 class="responsiveTitle">To-dos</h3>
-      <p class="noteCount">Sample Count</p>
+      <p class="noteCount"></p>
     </div>
     
-    <div class="options">
-      <button id="eto"><img src="options.svg" height="20px" width="20px" /></button>
-      <div class="hidden-option option-buttons">
-        <button>Edit</button>
-        <button>Hide completed</button>
-        <button>Settings</button>
+    <div class="options-cont">
+      <button id="three-dot-btn"><img src="options.svg" class="" height="20px" width="20px" /></button>
+      <div class="hidden-option option-menu">
+        <button id="Edit">Edit</button>
+        <button id="Completed">Hide completed</button>
+        <button id="Settings">Settings</button>
       </div>
     </div>
   </header>
   
   <main>
     <div class="noteItem">
-      <button class="noteCheck"><img src="circle.svg" height="30px" width="30px" /></button>
+      <input type="checkbox" class="checkboxes">
       test
     </div>
     <div class="noteItem">
-      <button class="noteCheck"><img src="circle.svg" height="30px" width="30px" /></button>
+      <input type="checkbox" class="checkboxes">
       test
     </div>
     <div class="noteItem">
-      <button class="noteCheck"><img src="circle.svg" height="30px" width="30px" /></button>
+      <input type="checkbox" class="checkboxes">
       test
     </div>
   </main>
@@ -54,6 +54,6 @@
 
   <button id="addNote"><img src="add.svg" height="20px" width="20px" </button>
 
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
