@@ -1,6 +1,7 @@
 // Constants
 const SCROLL_THRESHOLD = 150;
 
+const checkboxArr = []; // outside kase kung nasa loob mareredeclare lang to everytime mag cclick which will result sa isang item lang sa array
 
 // DOM Elements
 const bodyElement = document.body;
@@ -34,6 +35,7 @@ const closeNewNote = document.querySelector("#close-new-note");
 const editOption = document.getElementById("Edit");
 
 const selectAll = document.querySelector(".check");
+selectAll.checked = false;
 
 const checkboxes = document.querySelectorAll(".checkboxes");
 
@@ -151,24 +153,44 @@ function selectAllFunc() {
   if (selectAll.checked === true) {
     checkboxes.forEach((checkbox) => {
       checkbox.checked = true;
-      responsiveTitle.innerText = "All selected"
+      responsiveTitle.innerText = "All selected";
+      checkboxArr.push(checkbox);
     });
   } else {
     checkboxes.forEach((checkbox) => {
       checkbox.checked = false;
       responsiveTitle.innerText = "Select items"
+      checkboxArr.pop(checkbox);
     });
   }
+  console.log(checkboxArr);
 };
 
+
 function eachCheckbox () {
+  
   if(this.checked === true && this.style.position === "relative"){
     //yung bababa
-  } else if(this.checked === true && this.style.position === "absolute"){
-      //dynamic header count of the checked boxes
-      responsiveTitle.innerText = `${this.length.checked} selected`;
-  }
-}
+  } else if(this.style.position === "absolute"){
+    if (this.checked === true) {
+      checkboxArr.push(this);
+    } else {
+        checkboxArr.pop();  
+    };
+
+    responsiveTitle.innerText = `${checkboxArr.length} selected`;
+    
+    if (checkboxArr.length === 0) {
+      responsiveTitle.innerText = `Select items`;
+    } else if(checkboxes.length === checkboxArr.length) {
+      responsiveTitle.innerText = "All selected";
+      selectAll.checked = true;
+    } else if(checkboxes.length > checkboxArr.length && selectAll.checked === true) {
+      selectAll.checked = false;
+    };
+  };
+};
+
 
 // Event Listeners
 window.addEventListener("scroll", navbarScroll);
@@ -191,3 +213,4 @@ closeEdit.addEventListener("click", handleCloseEditClick);
 selectAll.addEventListener("click", selectAllFunc);
 
 checkboxes.forEach((checkbox) => checkbox.addEventListener("click", eachCheckbox));
+

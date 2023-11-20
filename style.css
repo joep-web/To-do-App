@@ -37,6 +37,20 @@ header {
   z-index: 1;
 }
 
+.close-edit, body > input[type="checkbox"] {
+  position: absolute;
+  top: 2%;
+  z-index: 2;
+}
+
+body > input[type="checkbox"] {
+  right: 5%;
+}
+
+.close-edit{
+  left: 5%;
+}
+
 .options-cont {
   padding-bottom: 40px;
   transition: 0.4s;
@@ -251,7 +265,8 @@ input[type="checkbox"]:checked::before{
   outline: none;
 }
 
-.close-edit::before {
+
+input[type="checkbox"]::after{
   content: "";
   height: 100%;
   width: 100%;
@@ -261,26 +276,12 @@ input[type="checkbox"]:checked::before{
   top: 0;
   left: 0;
   transform: scale(0);
-  transition: transform 1ms;
-  opacity: 0.5;
-  z-index: 5;
-}
-
-.close-edit:active::before{
-  transform:scale(1.2);
+  transition: transform 100ms;
   z-index: -1;
+  opacity: 0.5;
+  
 }
 
-.close-edit, body > input[type="checkbox"] {
-  position: absolute;
-  top: 2%;
-  z-index: 2;
-}
-
-body > input[type="checkbox"] {
-  right: 5%;
-}
-
-.close-edit{
-  left: 5%;
+input[type="checkbox"]:active::after{
+  transform:scale(2);
 }
