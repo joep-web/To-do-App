@@ -116,13 +116,14 @@ body > input[type="checkbox"] {
   justify-content: center;
   align-items: flex-start;  
   background: #343434;
-  border-radius: 15px;
+  border-radius: 13px;
   z-index: 2;
   width: 95%;
   max-width: 300px;
   height: 115px;
   position: absolute;
   top: 45px;
+  overflow: hidden;
 }
 
 .option-menu button {
@@ -131,8 +132,39 @@ body > input[type="checkbox"] {
   background: #343434;
   padding: 5px;
   color: white;
-  width: 95%;
+  width: 100%;
   text-align: left;
+  position: relative;
+}
+
+.option-menu button::before{
+  content: "";
+  background:gray;
+  padding: 0 20%;
+  left:0;
+  right: 0;
+  width: 100%;
+  transform: scale(0);
+  height: 100%;
+  position: absolute;
+  opacity: 0.5;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.option-menu button:last-of-type::before {
+  padding: 0 20% 11% 20% ;
+  border-radius: 0 0 10px 10px;
+  top: 0;
+}
+.option-menu button:first-of-type::before{
+  padding: 15% 20% 0 20%;
+  border-radius: 10px 10px 0 0;
+  bottom: 0;
+}
+
+.option-menu button:active::before {
+  transform: scale(1.2);
 }
 
 .hidden-option {
@@ -144,11 +176,15 @@ body > input[type="checkbox"] {
 /* main */
 
 main {
+  height: 100%;
+  overflow: scroll;
+}
+
+.cont-for-to-dos{
   display: grid;
   grid-template-rows: repeat(3, minmax( 65px, 1fr));
   grid-template-columns: 1fr;
   row-gap: 5px;
-  overflow: scroll;
 }
 
 .noteItem {
@@ -284,4 +320,13 @@ input[type="checkbox"]::after{
 
 input[type="checkbox"]:active::after{
   transform:scale(2);
+}
+
+#checkmark-button:enabled{
+  opacity: 1;
+  
+}
+
+#checkmark-button:disabled {
+  opacity: 0.5;
 }

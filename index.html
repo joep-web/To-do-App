@@ -19,7 +19,7 @@
     
     <div class="options-cont">
       <button id="three-dot-btn"><img src="options.svg" class="" height="20px" width="20px" /></button>
-      <div class="hidden-option option-menu">
+      <div class="option-menu hidden-option">
         <button id="Edit">Edit</button>
         <button id="Completed">Hide completed</button>
         <button id="Settings">Settings</button>
@@ -28,31 +28,38 @@
   </header>
   
   <main>
-    <div class="noteItem">
-      <input type="checkbox" class="checkboxes">
-      test
-    </div>
-    <div class="noteItem">
-      <input type="checkbox" class="checkboxes">
-      test
-    </div>
-    <div class="noteItem">
-      <input type="checkbox" class="checkboxes">
-      test
-    </div>
+    <section class="cont-for-to-dos">
+      <div class="noteItem">
+        <input type="checkbox" class="checkboxes">
+        test
+      </div>
+      <div class="noteItem">
+        <input type="checkbox" class="checkboxes">
+        test
+      </div>
+      <div class="noteItem">
+        <input type="checkbox" class="checkboxes">
+        test
+      </div>
+    </section>
+    <section class="cont-for-done-notes hidden">
+      <p class="done-count"></p>
+    </section>
   </main>
+  
 
+  
   <div class="new-note hidden">
     <div class="new-note-head">
       <button id="close-new-note"><img src="xclose.svg" height="30px" width="30px" /></button>
       <span>New To-Do</span>
-      <button><img src="checkmark.svg" height="30px" width="30px" /></button>
+      <button id ="checkmark-button"><img src="checkmark.svg" height="30px" width="30px" /></button>
     </div>
 
     <input type="text" placeholder="New to-do" id="inpt">
   </div>
 
-  <button id="addNote"><img src="add.svg" height="20px" width="20px" </button>
+  <button id="addNote" ><img src="add.svg" height="20px" width="20px" </button>
 
   <script src="script.js"></script>
 </body>

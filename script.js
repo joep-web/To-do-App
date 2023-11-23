@@ -2,11 +2,15 @@
 const SCROLL_THRESHOLD = 150;
 
 const checkboxArr = []; // outside kase kung nasa loob mareredeclare lang to everytime mag cclick which will result sa isang item lang sa array
+let timeoutId; // sa hold note item func
 
 // DOM Elements
 const bodyElement = document.body;
 
 const main = document.querySelector("main");
+
+const toDosCont = document.querySelector(".cont-for-to-dos");
+  
 const responsiveTitle = document.querySelector(".responsiveTitle");
 const contForTitle = document.querySelector(".contForTitle");
 
@@ -20,7 +24,9 @@ const threeDotBtn = document.querySelector("#three-dot-btn");
 
 const optionMenu = document.querySelector(".option-menu");
 
-const mainChildren = main.children;
+const mainChildren = main.children; // live html collection 
+
+const noteItemCount = toDosCont.children;
 
 const newNoteCont = document.querySelector(".new-note");
 
@@ -41,9 +47,10 @@ const checkboxes = document.querySelectorAll(".checkboxes");
 
 const closeEdit = document.querySelector(".close-edit");
 
+const checkmarkAddNote = document.querySelector("#checkmark-button ");
 
-//note count dynamic
-noteCount.innerText = `${mainChildren.length} to-dos`;
+// note count dynamic
+noteCount.innerText = `${noteItemCount.length} to-dos`;
 
 // Functions
 
@@ -75,14 +82,17 @@ function navbarScrollEnd() {
 
 function toggleOptionHidden() {
   optionMenu.classList.toggle("hidden-option");
+  optionMenu.style.transform = "scaleY(1)";
 }
 
 function handleNoteItemClick(e) {
   if (e.target.classList.contains("noteItem")) {
+    e.stopPropagation();
     toggleNewNoteHidden();
     editNoteTitle.innerText = "Edit To-Do";
     inpt.value = e.target.innerText;
     inpt.focus();
+    checkmark();
   }
 }
 
@@ -96,6 +106,7 @@ function handleAddNoteClick(event) {
     toggleNewNoteHidden();
     inpt.focus();
     inpt.value = "";
+    checkmark();
   }
 }
 
@@ -115,6 +126,7 @@ function handleEditOptionClick(e) {
 
 function handleCloseEditClick() {
   cancelEditClick();
+  addNote.classList.toggle("hidden");
 }
 
 // Additional Helper Functions
@@ -126,6 +138,7 @@ function editOptionClickActions() {
   optionMenu.classList.toggle("hidden-option");
   selectAll.classList.toggle("hidden")
   closeEdit.classList.toggle("hidden");
+  addNote.classList.toggle("hidden");
   noteCount.innerText = "";
 }
 
@@ -135,13 +148,14 @@ function cancelEditClick() {
   threeDotImg.classList.toggle("hidden");
   selectAll.classList.toggle("hidden");
   closeEdit.classList.toggle("hidden");
-  noteCount.innerText = `${mainChildren.length} to-dos`;
+  noteCount.innerText = `${noteItemCount.length} to-dos`;
   checkboxes.forEach((circle) =>{
       circle.style.position = "relative";
       circle.style.right = "auto";
       circle.style.top = "auto";
       if (circle.checked === true) {
         circle.checked = false;
+        checkboxArr.length = 0;
       };
     });
   if (selectAll.checked === true) {
@@ -150,6 +164,7 @@ function cancelEditClick() {
 };
 
 function selectAllFunc() {
+  checkboxArr.length = 0;
   if (selectAll.checked === true) {
     checkboxes.forEach((checkbox) => {
       checkbox.checked = true;
@@ -160,7 +175,6 @@ function selectAllFunc() {
     checkboxes.forEach((checkbox) => {
       checkbox.checked = false;
       responsiveTitle.innerText = "Select items"
-      checkboxArr.pop(checkbox);
     });
   }
   console.log(checkboxArr);
@@ -168,7 +182,6 @@ function selectAllFunc() {
 
 
 function eachCheckbox () {
-  
   if(this.checked === true && this.style.position === "relative"){
     //yung bababa
   } else if(this.style.position === "absolute"){
@@ -192,15 +205,41 @@ function eachCheckbox () {
 };
 
 
+function mainEventHandler(e) {
+  if(e.target.classList.contains("noteItem") && Array.from(checkboxes).every(cb => cb.style.position === "absolute")){
+    let box = e.target.querySelector(".checkboxes");
+    box.click();
+  } else if(e.target.classList.contains("checkboxes") && Array.from(checkboxes).every(cb => cb.style.position === "relative")){
+    
+  } else {
+    handleNoteItemClick(e);
+  };
+};
+
+function touchstart(e) {
+    timeoutId = setTimeout(function () {
+      editOption.click();
+      optionMenu.classList.toggle("hidden-option");
+      let someVar = e.target.querySelector(".checkboxes");
+      someVar.click();
+    }, 1000);
+};
+
+function checkmark() {
+  if (inpt.value === "") {
+  checkmarkAddNote.disabled = true;
+} else {
+  checkmarkAddNote.disabled = false;
+  }
+};
+
+
 // Event Listeners
 window.addEventListener("scroll", navbarScroll);
 
 window.addEventListener("scrollend", navbarScrollEnd);
 
 threeDotBtn.addEventListener("click", toggleOptionHidden);
-
-Array.from(mainChildren).forEach((noteItem) => noteItem.addEventListener("click", handleNoteItemClick
-));
 
 closeNewNote.addEventListener("click", toggleNewNoteHidden);
 
@@ -214,3 +253,16 @@ selectAll.addEventListener("click", selectAllFunc);
 
 checkboxes.forEach((checkbox) => checkbox.addEventListener("click", eachCheckbox));
 
+main.addEventListener("click", mainEventHandler);
+
+Array.from(mainChildren).forEach(child => { 
+  child.addEventListener('touchstart', touchstart)});
+
+Array.from(mainChildren).forEach(child => { 
+  child.addEventListener('touchend',() => {
+    clearTimeout(timeoutId);
+})});
+
+inpt.addEventListener("input", checkmark);
+
+console.log(closeNewNote.nextElementSibling.innerText);
