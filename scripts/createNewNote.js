@@ -1,4 +1,4 @@
-import {toDosCont, noteCount, noteItemCount, toggleNewNoteHidden} from "./script.js"
+import {toDosCont, noteCount, noteItemCount, everyNoteItem} from "./script.js"
 export {createItem, createNoteItem};
 
 
@@ -18,7 +18,7 @@ const createItem = {
   }
 };
 
-function createNoteItem(createObj) {
+function createNoteItem(createObj, text) {
   const newDiv = document.createElement(createObj.parentDiv.tagName);
   const newCb = document.createElement(createObj.innerInput.tagName);
   const newSpan = document.createElement(createObj.span.tagName);
@@ -29,8 +29,8 @@ function createNoteItem(createObj) {
   newCb.style.position = "relative";
   toDosCont.append(newDiv);
   newDiv.append(newCb);
-  newSpan.innerText = inpt.value;
+  newSpan.innerText = text;
   newDiv.append(newSpan);
   noteCount.innerText = `${noteItemCount.length} to-dos`;
-  toggleNewNoteHidden();
+  everyNoteItem.push(newDiv);
 };

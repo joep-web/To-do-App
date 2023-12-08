@@ -38,6 +38,9 @@
     <!-- done notes -->
     <section class="cont-for-done-notes hidden">
       <p class="done-count"></p>
+      <div class="done-notes">
+         
+      </div>
     </section>
   </main>
 
@@ -53,7 +56,21 @@
     <input type="text" placeholder="New to-do" id="inpt">
   </div>
 
-  <button class="addNote"><img src="svgs-icon/add.svg" height="20px" width="20px" </button>
+  <button class="addNote">
+    <img src="svgs-icon/add.svg" height="20px" width="20px">
+  </button>
+
+  <footer>
+    <hr />
+    <div class="footer-div" disabled>
+      <img src="svgs-icon/to-do-icon.svg" class="bottom-icon" height="30px" width="30px">
+      <span>To-dos</span>
+    </div>
+    <div class="delete-opt hidden">
+      <img src="svgs-icon/trash.svg" height="30px" width="30px"/>
+      <span>Delete</span>
+    </div>
+  </footer>
 
   <script type="module" src="scripts/script.js"></script>
 </body>

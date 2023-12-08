@@ -9,7 +9,7 @@ function navbarScroll() {
 function navbarScrollEnd() {
   let shouldScroll = true;
 
-  if (window.scrollY < 150) {
+  if (window.scrollY < 600) {
     if (shouldScroll == false) {
       //nothing
     } else {
